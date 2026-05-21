@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elodie Yab — Outils simples pour commerces de proximité</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream:      #FAFAF7;
+      --beige:      #F5F0E8;
+      --beige-mid:  #EDE5D8;
+      --beige-dark: #E0D5C5;
+      --sage:       #5C8A6E;
+      --sage-light: #EAF1ED;
+      --sage-mid:   #B8D0C3;
+      --terra:      #C4714A;
+      --terra-light:#FAF0EB;
+      --ink:        #2C2C2A;
+      --warm-gray:  #6B6560;
+      --light-gray: #9A9491;
+      --border:     #E4DDD3;
+      --shadow-sm:  rgba(44,44,42,0.05);
+      --shadow-md:  rgba(44,44,42,0.09);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Inter', -apple-system, sans-serif;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 100;
+      padding: 0 2.5rem;
+      height: 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(250,250,247,0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-brand {
+      font-family: 'Lora', serif;
+      font-size: .9rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--warm-gray);
+      letter-spacing: .03em;
+      text-decoration: none;
+    }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-right a {
+      color: var(--warm-gray);
+      text-decoration: none;
+      font-size: .82rem;
+      font-weight: 500;
+      transition: color .18s;
+    }
+    .nav-right a:hover { color: var(--ink); }
+    .nav-btn {
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--ink) !important;
+      padding: .4rem 1rem;
+      border-radius: 6px;
+      border: 1.5px solid var(--border);
+      transition: border-color .18s, background .18s !important;
+    }
+    .nav-btn:hover {
+      border-color: var(--sage-mid) !important;
+      background: var(--sage-light) !important;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 2.5rem 5rem;
+    }
+    .hero-inner {
+      max-width: 780px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 2.25rem;
+    }
+    .hero h1 {
+      font-family: 'Lora', serif;
+      font-size: clamp(1.9rem, 4.2vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.22;
+      letter-spacing: -.022em;
+      color: var(--ink);
+      margin-bottom: 1.75rem;
+    }
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--warm-gray);
+      line-height: 1.75;
+      max-width: 520px;
+      margin-bottom: 3rem;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-family: 'Inter', sans-serif;
+      font-size: .88rem;
+      font-weight: 600;
+      background: var(--sage);
+      color: #fff;
+      padding: .75rem 1.65rem;
+      border-radius: 8px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background .18s, transform .18s;
+      box-shadow: 0 2px 12px rgba(92,138,110,.18);
+    }
+    .btn-primary:hover { background: #4d7a5e; transform: translateY(-1px); }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-family: 'Inter', sans-serif;
+      font-size: .88rem;
+      font-weight: 600;
+      background: transparent;
+      color: var(--ink);
+      padding: .75rem 1.65rem;
+      border-radius: 8px;
+      text-decoration: none;
+      border: 1.5px solid var(--border);
+      cursor: pointer;
+      transition: border-color .18s, background .18s, transform .18s;
+    }
+    .btn-secondary:hover { border-color: var(--sage-mid); background: var(--sage-light); transform: translateY(-1px); }
+
+    /* ─── SHARED ─── */
+    .section-wrap { padding: 5.5rem 2.5rem; }
+    .section-wrap.alt { background: var(--beige); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .container { max-width: 1080px; margin: 0 auto; }
+
+    .eyebrow {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: .85rem;
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+    }
+    .eyebrow::before { content: ''; width: 14px; height: 1.5px; background: var(--terra); border-radius: 2px; }
+    h2.block-title {
+      font-family: 'Lora', serif;
+      font-size: clamp(1.85rem, 3.5vw, 2.75rem);
+      font-weight: 700;
+      letter-spacing: -.025em;
+      line-height: 1.18;
+      color: var(--ink);
+      margin-bottom: .75rem;
+    }
+    .block-intro {
+      font-size: .95rem;
+      color: var(--warm-gray);
+      line-height: 1.75;
+      max-width: 440px;
+      margin-bottom: 3.25rem;
+    }
+
+    /* ─── DÉMARCHE ─── */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    .step-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2rem 1.75rem;
+      box-shadow: 0 1px 8px var(--shadow-sm);
+      transition: transform .22s, box-shadow .22s;
+    }
+    .step-card:hover { transform: translateY(-3px); box-shadow: 0 6px 22px var(--shadow-md); }
+    .step-n {
+      font-family: 'Lora', serif;
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 1.1rem;
+      letter-spacing: -.04em;
+    }
+    .step-card:nth-child(1) .step-n { color: var(--beige-dark); }
+    .step-card:nth-child(2) .step-n { color: var(--sage-mid); }
+    .step-card:nth-child(3) .step-n { color: #E8C2AA; }
+    .step-verb {
+      font-family: 'Lora', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: .55rem;
+    }
+    .step-text { font-size: .875rem; color: var(--warm-gray); line-height: 1.7; }
+    .step-pill {
+      display: inline-block;
+      margin-top: 1.1rem;
+      font-size: .68rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: .28rem .7rem;
+      border-radius: 99px;
+    }
+    .step-card:nth-child(1) .step-pill { background: var(--sage-light); color: var(--sage); border: 1px solid var(--sage-mid); }
+    .step-card:nth-child(2) .step-pill { background: var(--beige); color: var(--warm-gray); border: 1px solid var(--beige-dark); }
+    .step-card:nth-child(3) .step-pill { background: var(--terra-light); color: var(--terra); border: 1px solid #E8B89A; }
+
+    /* ─── PROJETS ─── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+    }
+    .project-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 1px 8px var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      transition: transform .22s, box-shadow .22s;
+    }
+    .project-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px var(--shadow-md); }
+
+    .project-img-placeholder {
+      width: 100%;
+      aspect-ratio: 16/7;
+      background: var(--beige);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .75rem;
+      font-style: italic;
+      color: var(--light-gray);
+    }
+
+    .project-body { padding: 1.75rem; display: flex; flex-direction: column; gap: .95rem; flex: 1; }
+
+    .project-meta { display: flex; align-items: center; gap: .75rem; }
+    .project-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: var(--beige);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .project-sector {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: .15rem;
+    }
+    .project-title {
+      font-family: 'Lora', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -.01em;
+      line-height: 1.3;
+    }
+
+    .project-situation {
+      font-family: 'Lora', serif;
+      font-size: .86rem;
+      font-style: italic;
+      color: var(--warm-gray);
+      line-height: 1.7;
+      padding: .8rem 1rem .8rem 1.6rem;
+      background: var(--beige);
+      border-radius: 8px;
+      position: relative;
+    }
+    .project-situation::before {
+      content: '"';
+      font-size: 1.8rem;
+      color: var(--beige-dark);
+      line-height: 1;
+      position: absolute;
+      top: .3rem;
+      left: .55rem;
+      font-family: 'Lora', serif;
+    }
+
+    .project-solution {
+      font-size: .86rem;
+      color: var(--ink);
+      line-height: 1.75;
+    }
+    .project-solution strong { color: var(--sage); font-weight: 600; }
+
+    .project-footnote {
+      font-size: .72rem;
+      font-style: italic;
+      color: var(--light-gray);
+      margin-top: auto;
+      padding-top: .25rem;
+    }
+
+    /* ─── À PROPOS ─── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 210px 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .photo-block {
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+    }
+    .photo-placeholder {
+      width: 100%;
+      aspect-ratio: 3/4;
+      border-radius: 14px;
+      background: var(--cream);
+      border: 1.5px dashed var(--beige-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .75rem;
+      font-style: italic;
+      color: var(--light-gray);
+    }
+    .about-text .eyebrow { margin-bottom: .85rem; }
+    .about-text h2 { margin-bottom: 1.5rem; }
+    .about-text p {
+      font-size: .95rem;
+      color: var(--warm-gray);
+      line-height: 1.9;
+      margin-bottom: 1rem;
+    }
+    .about-text p:last-child { margin-bottom: 0; }
+
+    /* ─── CONTACT ─── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .contact-left h2 { margin-bottom: 1rem; }
+    .contact-intro {
+      font-size: .95rem;
+      color: var(--warm-gray);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+    .contact-links { display: flex; flex-direction: column; gap: .75rem; }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      padding: 1rem 1.2rem;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      text-decoration: none;
+      color: var(--ink);
+      box-shadow: 0 1px 6px var(--shadow-sm);
+      transition: transform .18s, box-shadow .18s, border-color .18s;
+    }
+    .contact-link:hover { transform: translateX(3px); box-shadow: 0 4px 14px var(--shadow-md); border-color: var(--sage-mid); }
+    .contact-link-icon {
+      width: 36px; height: 36px;
+      border-radius: 9px;
+      background: var(--beige);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-link-label { font-size: .68rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--warm-gray); }
+    .contact-link-value { font-size: .88rem; font-weight: 600; color: var(--ink); }
+    .contact-reply {
+      font-size: .82rem;
+      color: var(--sage);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      margin-top: 1.25rem;
+    }
+    .contact-reply::before { content: '✓'; font-weight: 700; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      background: var(--beige);
+      padding: 1.5rem 2.5rem;
+      text-align: center;
+    }
+    .footer-copy { font-size: .78rem; color: var(--warm-gray); }
+    .footer-ml { margin-top: .4rem; }
+    .footer-ml button {
+      background: none;
+      border: none;
+      color: var(--light-gray);
+      font-size: .7rem;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      padding: 0;
+      font-family: inherit;
+      transition: color .18s;
+    }
+    .footer-ml button:hover { color: var(--warm-gray); }
+
+    /* ─── MODAL MENTIONS LÉGALES ─── */
+    .ml-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(44,44,42,.45);
+      backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .ml-overlay.open { display: flex; }
+    .ml-modal {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 2.25rem;
+      max-width: 540px;
+      width: 100%;
+      max-height: 88vh;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: 0 20px 50px rgba(44,44,42,.14);
+    }
+    .ml-close {
+      position: absolute;
+      top: 1.1rem; right: 1.1rem;
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      background: var(--beige);
+      border: 1px solid var(--border);
+      color: var(--warm-gray);
+      font-size: .9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .18s;
+    }
+    .ml-close:hover { background: var(--beige-mid); }
+    .ml-modal h2 {
+      font-family: 'Lora', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+      letter-spacing: -.02em;
+    }
+    .ml-modal h3 {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: .5rem;
+      margin-top: 1.35rem;
+    }
+    .ml-modal h3:first-of-type { margin-top: 0; }
+    .ml-modal p { font-size: .85rem; color: var(--warm-gray); line-height: 1.75; margin-bottom: .3rem; }
+    .ml-modal a { color: var(--sage); text-decoration: none; }
+    .ml-modal a:hover { text-decoration: underline; }
+
+    /* ─── FADE ─── */
+    .fade { opacity: 0; transform: translateY(18px); transition: opacity .55s ease, transform .55s ease; }
+    .fade.in { opacity: 1; transform: none; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .steps-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .photo-placeholder { max-width: 160px; aspect-ratio: 1; }
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    }
+    @media (max-width: 620px) {
+      nav { padding: 0 1.25rem; }
+      .nav-right { gap: 1.1rem; }
+      .nav-right li:not(:last-child) { display: none; }
+      .section-wrap { padding: 3.75rem 1.25rem; }
+      .hero { padding: 6.5rem 1.25rem 3.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="#" class="nav-brand">Elodie Yab</a>
+  <ul class="nav-right">
+    <li><a href="#projets">Projets</a></li>
+    <li><a href="#demarche">Ma démarche</a></li>
+    <li><a href="#apropos">À propos</a></li>
+    <li><a href="#contact" class="nav-btn">Me contacter</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-tag">Outils simples pour commerces de proximité</span>
+    <h1>J'observe des problèmes qui reviennent souvent dans certains commerces. Puis j'essaie d'imaginer des outils simples pour y répondre.</h1>
+    <p class="hero-sub">Une approche simple et concrète, pensée pour le terrain.</p>
+    <div style="display:flex; gap: 1rem; flex-wrap: wrap;">
+      <a href="#projets" class="btn-primary">
+        Voir les projets
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#contact" class="btn-secondary">Me contacter</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROJETS ── -->
+<section class="section-wrap" id="projets">
+  <div class="container">
+    <p class="eyebrow fade">Ce que j'ai construit</p>
+    <h2 class="block-title fade">Des projets qui partent<br/>d'une situation réelle.</h2>
+    <p class="block-intro fade">Chaque outil présenté ici répond à une difficulté concrète, observée sur le terrain.</p>
+
+    <div class="projects-grid">
+
+      <!-- Spa -->
+      <div class="project-card fade">
+        <div class="project-img-placeholder">Capture à venir</div>
+        <div class="project-body">
+          <div class="project-meta">
+            <div class="project-icon">💆</div>
+            <div>
+              <div class="project-sector">Spa & Hammam</div>
+              <div class="project-title">Agenda intelligent</div>
+            </div>
+          </div>
+          <p class="project-situation">La gérante jonglait entre les appels, les messages et son agenda papier pour organiser les rendez-vous. Beaucoup de temps perdu, des oublis, une charge mentale constante.</p>
+          <p class="project-solution">Un agenda interne connecté à Google Calendar. Les confirmations et rappels partent automatiquement. <strong>Toutes les informations clients sont centralisées au même endroit.</strong></p>
+          <p class="project-footnote">Connecté aux outils déjà en place</p>
+        </div>
+      </div>
+
+      <!-- Coiffure -->
+      <div class="project-card fade">
+        <div class="project-img-placeholder">Capture à venir</div>
+        <div class="project-body">
+          <div class="project-meta">
+            <div class="project-icon">✂️</div>
+            <div>
+              <div class="project-sector">Salon de coiffure</div>
+              <div class="project-title">Préparation avant le rendez-vous</div>
+            </div>
+          </div>
+          <p class="project-situation">La coiffeuse découvrait l'état des cheveux de sa cliente seulement à son arrivée. Parfois la prestation demandée n'était pas réalisable. Des incompréhensions, du temps perdu.</p>
+          <p class="project-solution">Après chaque réservation, un message WhatsApp part automatiquement pour demander des photos des cheveux et du modèle souhaité — <strong>avant le rendez-vous.</strong></p>
+          <p class="project-footnote">Connecté aux outils déjà en place</p>
+        </div>
+      </div>
+
+      <!-- Restaurant -->
+      <div class="project-card fade">
+        <div class="project-img-placeholder">Capture à venir</div>
+        <div class="project-body">
+          <div class="project-meta">
+            <div class="project-icon">🍽️</div>
+            <div>
+              <div class="project-sector">Restaurant</div>
+              <div class="project-title">Tables en attente pendant le service</div>
+            </div>
+          </div>
+          <p class="project-situation">Pendant le rush du soir, l'équipe n'avait pas le temps de gérer les clients en retard. Les tables restaient bloquées. D'autres clients attendaient. Personne ne savait quoi décider.</p>
+          <p class="project-solution">Une interface simple pour voir en temps réel quelles tables sont en retard et <strong>envoyer une relance en un clic</strong> — sans décrocher le téléphone.</p>
+          <p class="project-footnote">Connecté aux outils déjà en place</p>
+        </div>
+      </div>
+
+      <!-- Boulangerie -->
+      <div class="project-card fade">
+        <div class="project-img-placeholder">Capture à venir</div>
+        <div class="project-body">
+          <div class="project-meta">
+            <div class="project-icon">🥐</div>
+            <div>
+              <div class="project-sector">Boulangerie</div>
+              <div class="project-title">Commandes spéciales en période de fêtes</div>
+            </div>
+          </div>
+          <p class="project-situation">À Noël et à Pâques, les commandes s'accumulaient sur des bouts de papier. Des oublis, des erreurs, des clients qui arrivaient pour rien.</p>
+          <p class="project-solution">Un outil simple pour enregistrer, suivre et retrouver les commandes rapidement. <strong>Confirmation par SMS automatique</strong> dès la commande passée.</p>
+          <p class="project-footnote">Connecté aux outils déjà en place</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── MA DÉMARCHE ── -->
+<section class="section-wrap alt" id="demarche">
+  <div class="container">
+    <p class="eyebrow fade">Ma démarche</p>
+    <h2 class="block-title fade">Trois étapes.<br/>Pas une de plus.</h2>
+    <p class="block-intro fade">Je ne commence jamais par une solution. Je commence par regarder ce qui se passe vraiment.</p>
+
+    <div class="steps-grid">
+      <div class="step-card fade">
+        <div class="step-n">01</div>
+        <div class="step-verb">J'observe</div>
+        <p class="step-text">Je vais voir sur le terrain ce qui revient vraiment.</p>
+        <span class="step-pill">Terrain</span>
+      </div>
+      <div class="step-card fade">
+        <div class="step-n">02</div>
+        <div class="step-verb">J'imagine</div>
+        <p class="step-text">Je réfléchis à quelque chose de simple, connecté à ce que vous utilisez déjà.</p>
+        <span class="step-pill">Conception</span>
+      </div>
+      <div class="step-card fade">
+        <div class="step-n">03</div>
+        <div class="step-verb">Je construis</div>
+        <p class="step-text">Je crée un outil qui fonctionne vraiment, et je reste disponible après.</p>
+        <span class="step-pill">Livraison</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── À PROPOS ── -->
+<section class="section-wrap" id="apropos">
+  <div class="container">
+    <div class="about-grid">
+      <div class="photo-block fade">
+        <div class="photo-placeholder">Photo à venir</div>
+      </div>
+      <div class="about-text fade">
+        <p class="eyebrow">À propos</p>
+        <h2 class="block-title">Un parcours<br/>de terrain.</h2>
+        <p>Après plusieurs années sur le terrain — chez Auchan puis Carrefour — j'ai commencé à remarquer les mêmes problèmes revenir un peu partout : beaucoup de charge mentale, des tâches répétitives qui prennent du temps, des outils pas toujours adaptés à la réalité des commerces.</p>
+        <p>Aujourd'hui, j'essaie simplement d'imaginer des outils pour rendre certaines situations un peu moins compliquées. Pas des logiciels énormes ou des systèmes ultra complexes — plutôt des outils simples, pensés pour le quotidien.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section class="section-wrap alt" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-left fade">
+        <p class="eyebrow">Contact</p>
+        <h2 class="block-title">Vous vous reconnaissez dans une de ces situations ?</h2>
+        <p class="contact-intro">Vous n'êtes pas forcément dans ces secteurs. Si vous avez une difficulté qui revient chaque semaine dans votre commerce, nous pouvons en discuter.</p>
+        <a href="mailto:elodie.yab@gmail.com" class="btn-primary" style="width: fit-content;">
+          Me contacter
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <p class="contact-reply">Je réponds à tous les messages.</p>
+      </div>
+      <div class="fade">
+        <div class="contact-links">
+          <a href="mailto:elodie.yab@gmail.com" class="contact-link">
+            <div class="contact-link-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2C2C2A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <div class="contact-link-label">Email</div>
+              <div class="contact-link-value">elodie.yab@gmail.com</div>
+            </div>
+          </a>
+          <a href="https://tiktok.com/@elodie_yab" target="_blank" rel="noopener" class="contact-link">
+            <div class="contact-link-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#2C2C2A"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05A6.34 6.34 0 003.15 15.3a6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9a8.22 8.22 0 004.8 1.54V7.1a4.85 4.85 0 01-1.03-.41z"/></svg>
+            </div>
+            <div>
+              <div class="contact-link-label">TikTok</div>
+              <div class="contact-link-value">@elodie_yab</div>
+            </div>
+          </a>
+          <a href="https://instagram.com/elodie_yab" target="_blank" rel="noopener" class="contact-link">
+            <div class="contact-link-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2C2C2A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#2C2C2A" stroke="none"/></svg>
+            </div>
+            <div>
+              <div class="contact-link-label">Instagram</div>
+              <div class="contact-link-value">elodie_yab</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p class="footer-copy">© 2026 Elodie Yab — Outils simples pour commerces de proximité</p>
+  <p class="footer-ml">
+    <button onclick="document.getElementById('ml-overlay').classList.add('open')">Mentions légales</button>
+  </p>
+</footer>
+
+<!-- ── MODAL MENTIONS LÉGALES ── -->
+<div class="ml-overlay" id="ml-overlay">
+  <div class="ml-modal" role="dialog" aria-modal="true" aria-label="Mentions légales">
+    <button class="ml-close" onclick="document.getElementById('ml-overlay').classList.remove('open')" aria-label="Fermer">✕</button>
+    <h2>Mentions légales</h2>
+    <h3>Éditeur du site</h3>
+    <p>Nom : Elodie Elegbede</p>
+    <p>Dénomination commerciale : Elodie Yab</p>
+    <p>Email : <a href="mailto:elodie.yab@gmail.com">elodie.yab@gmail.com</a></p>
+    <h3>Hébergement</h3>
+    <p>Hostinger — <a href="https://www.hostinger.fr" target="_blank" rel="noopener">www.hostinger.fr</a></p>
+    <h3>Propriété intellectuelle</h3>
+    <p>L'ensemble du contenu de ce site (textes, structure, projets présentés) est la propriété exclusive d'Elodie Elegbede. Toute reproduction est interdite sans autorisation préalable.</p>
+    <h3>Données personnelles — RGPD</h3>
+    <p>Ce site ne collecte aucune donnée personnelle automatiquement. Les seules données échangées sont celles que vous transmettez volontairement par email. Ces données ne sont pas transmises à des tiers.</p>
+  </div>
+</div>
+
+<script>
+  // Scroll fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('in'), i * 75);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+
+  // Nav active state
+  const sections = document.querySelectorAll('section[id], .hero');
+  const navLinks = document.querySelectorAll('.nav-right a:not(.nav-btn)');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) current = s.id || ''; });
+    navLinks.forEach(a => {
+      const href = a.getAttribute('href').replace('#', '');
+      a.style.color = href === current ? 'var(--ink)' : '';
+    });
+  }, { passive: true });
+
+  // Mentions légales modal
+  const mlOverlay = document.getElementById('ml-overlay');
+  mlOverlay.addEventListener('click', e => { if (e.target === mlOverlay) mlOverlay.classList.remove('open'); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') mlOverlay.classList.remove('open'); });
+</script>
+
+</body>
+</html>
