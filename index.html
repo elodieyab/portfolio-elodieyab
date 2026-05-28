@@ -231,43 +231,44 @@
 
     /* ─── PROJETS — TAB LAYOUT ─── */
     .proj-layout {
-      display: grid;
-      grid-template-columns: 290px 1fr;
+      display: flex;
+      flex-direction: column;
       border: 1px solid var(--border);
       border-radius: 22px;
       overflow: hidden;
       box-shadow: 0 4px 28px var(--shadow-sm);
-      min-height: 640px;
       background: #fff;
     }
 
-    /* Left list */
+    /* Tab bar — always horizontal, 4 equal columns */
     .proj-tabs {
       background: var(--beige);
-      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
       display: flex;
-      flex-direction: column;
-      padding: .75rem 0;
+      flex-direction: row;
+      padding: 0;
     }
     .proj-tab {
+      flex: 1;
       display: flex;
       flex-direction: column;
+      align-items: center;
+      text-align: center;
       gap: .3rem;
-      padding: 1.15rem 1.4rem 1.15rem 1.25rem;
+      padding: 1.1rem .75rem;
       cursor: pointer;
-      border-left: 3px solid transparent;
-      position: relative;
+      border-bottom: 3px solid transparent;
       transition: background .18s, border-color .18s;
       user-select: none;
     }
-    .proj-tab:not(:last-child) { border-bottom: 1px solid var(--border); }
+    .proj-tab:not(:last-child) { border-right: 1px solid var(--border); }
     .proj-tab:hover:not(.active) { background: rgba(255,255,255,.55); }
 
     .proj-tab.active { background: #fff; }
-    .proj-tab[data-tab="spa"].active         { border-left-color: var(--sage); }
-    .proj-tab[data-tab="coiffure"].active    { border-left-color: var(--terra); }
-    .proj-tab[data-tab="restaurant"].active  { border-left-color: var(--gold); }
-    .proj-tab[data-tab="boulangerie"].active { border-left-color: var(--yellow); }
+    .proj-tab[data-tab="spa"].active         { border-bottom-color: var(--sage); }
+    .proj-tab[data-tab="coiffure"].active    { border-bottom-color: var(--terra); }
+    .proj-tab[data-tab="restaurant"].active  { border-bottom-color: var(--gold); }
+    .proj-tab[data-tab="boulangerie"].active { border-bottom-color: var(--yellow); }
 
     .proj-tab-badge {
       display: inline-block;
@@ -277,7 +278,6 @@
       text-transform: uppercase;
       padding: .2rem .6rem;
       border-radius: 50px;
-      width: fit-content;
     }
     .proj-tab[data-tab="spa"]         .proj-tab-badge { background: var(--sage-light);   color: var(--sage);  border: 1px solid var(--sage-mid); }
     .proj-tab[data-tab="coiffure"]    .proj-tab-badge { background: var(--terra-light);  color: var(--terra); border: 1px solid #E8B89A; }
@@ -296,16 +296,7 @@
       color: var(--light-gray);
       line-height: 1.4;
     }
-    .proj-tab-arrow {
-      position: absolute;
-      right: 1rem;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--light-gray);
-      transition: transform .18s, color .18s, opacity .18s;
-      opacity: 0;
-    }
-    .proj-tab.active .proj-tab-arrow { opacity: 1; color: var(--warm-gray); transform: translateY(-50%) translateX(2px); }
+    .proj-tab-arrow { display: none; }
 
     /* Right panels */
     .proj-panels { position: relative; overflow: hidden; }
@@ -665,21 +656,15 @@
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 980px) {
-      .proj-layout { grid-template-columns: 1fr; min-height: unset; }
-      .proj-tabs { flex-direction: row; overflow-x: auto; border-right: none; border-bottom: 1px solid var(--border); padding: 0; scrollbar-width: none; }
-      .proj-tabs::-webkit-scrollbar { display: none; }
-      .proj-tab { border-left: none; border-bottom: 3px solid transparent; flex-shrink: 0; padding: .85rem 1.1rem; border-top: none !important; }
-      .proj-tab:not(:last-child) { border-bottom: 3px solid transparent; border-right: 1px solid var(--border); }
-      .proj-tab[data-tab="spa"].active         { border-bottom-color: var(--sage);   border-left-color: transparent; }
-      .proj-tab[data-tab="coiffure"].active    { border-bottom-color: var(--terra);  border-left-color: transparent; }
-      .proj-tab[data-tab="restaurant"].active  { border-bottom-color: var(--gold);   border-left-color: transparent; }
-      .proj-tab[data-tab="boulangerie"].active { border-bottom-color: var(--yellow); border-left-color: transparent; }
-      .proj-tab-arrow { display: none; }
-      .proj-panel { min-height: unset; }
       .steps-grid { grid-template-columns: 1fr; }
       .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .about-grid .photo-block { max-width: 180px; }
       .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    }
+    @media (max-width: 580px) {
+      .proj-tab-badge { display: none; }
+      .proj-tab-sub   { display: none; }
+      .proj-tab { padding: .85rem .5rem; }
     }
     @media (max-width: 700px) {
       .footer-inner { grid-template-columns: 1fr; text-align: center; gap: 1.25rem; }
