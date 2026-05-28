@@ -98,47 +98,23 @@
       padding: 8rem 2.5rem 5rem;
       position: relative;
       overflow: hidden;
-      background: var(--cream);
     }
-    .hero-deco-ring1 {
-      position: absolute; pointer-events: none;
-      top: -140px; right: -140px;
-      width: 640px; height: 640px;
-      border-radius: 50%;
-      border: 1px solid var(--beige-dark);
-      opacity: .55;
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
     }
-    .hero-deco-ring2 {
-      position: absolute; pointer-events: none;
-      top: 40px; right: 60px;
-      width: 340px; height: 340px;
-      border-radius: 50%;
-      border: 1px solid var(--border);
-      opacity: .45;
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
-    .hero-deco-ring3 {
-      position: absolute; pointer-events: none;
-      bottom: 8%; left: 4%;
-      width: 130px; height: 130px;
-      border-radius: 50%;
-      border: 1px solid var(--beige-dark);
-      opacity: .4;
-    }
-    .hero-deco-dot {
-      position: absolute; pointer-events: none;
-      top: 32%; right: 18%;
-      width: 9px; height: 9px;
-      border-radius: 50%;
-      background: var(--terra);
-      opacity: .2;
-    }
-    .hero-deco-dot2 {
-      position: absolute; pointer-events: none;
-      bottom: 20%; left: 12%;
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      background: var(--sage);
-      opacity: .25;
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(245,240,232,.88);
     }
     .hero-inner {
       max-width: 840px;
@@ -162,7 +138,7 @@
     .hero h1 {
       font-family: 'Playfair Display', serif;
       font-size: clamp(2.3rem, 5.2vw, 4.4rem);
-      font-weight: 700;
+      font-weight: 400;
       line-height: 1.13;
       letter-spacing: -.028em;
       color: var(--ink);
@@ -736,11 +712,9 @@
 
 <!-- ── HERO ── -->
 <section class="hero">
-  <div class="hero-deco-ring1"></div>
-  <div class="hero-deco-ring2"></div>
-  <div class="hero-deco-ring3"></div>
-  <div class="hero-deco-dot"></div>
-  <div class="hero-deco-dot2"></div>
+  <div class="hero-bg">
+    <img src="https://images.pexels.com/photos/97815/pexels-photo-97815.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" loading="eager" />
+  </div>
   <div class="hero-inner">
     <span class="hero-tag">Outils simples pour commerces de proximité</span>
     <h1>J'observe des problèmes qui reviennent souvent dans certains commerces. Puis j'<em>imagine</em> des outils simples pour y répondre.</h1>
@@ -852,7 +826,7 @@
         <!-- Restaurant -->
         <div class="proj-panel" data-panel="restaurant" id="panel-restaurant" role="tabpanel">
           <div class="proj-panel-img">
-            <img src="https://images.pexels.com/photos/97815/pexels-photo-97815.jpeg?w=800" alt="Table de restaurant" loading="lazy" />
+            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80" alt="Table de restaurant" loading="lazy" />
             <div class="proj-panel-img-overlay"></div>
           </div>
           <div class="proj-panel-content">
