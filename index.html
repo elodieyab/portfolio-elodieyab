@@ -246,8 +246,8 @@
     /* ─── PROJETS ─── */
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.25rem;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
     }
     .project-card {
       background: #fff;
@@ -260,6 +260,40 @@
       transition: transform .22s, box-shadow .22s;
     }
     .project-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px var(--shadow-md); }
+
+    .project-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      flex: 1;
+      min-height: 0;
+    }
+    .project-col-left {
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid var(--border);
+    }
+    .project-col-left .project-context-img { flex-shrink: 0; height: 220px; }
+    .project-col-left .project-body { flex: 1; }
+    .project-col-right {
+      display: flex;
+      flex-direction: column;
+    }
+    .project-col-right .project-img-block {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .project-col-right .project-img-block img {
+      flex: 1;
+      width: 100%;
+      object-fit: cover;
+      min-height: 220px;
+      border-bottom: none;
+    }
+    .project-col-right .project-img-caption {
+      border-bottom: none;
+    }
     .card-spa         { border-left: 3px solid #5C8A6E; }
     .card-spa         .project-sector { color: #5C8A6E; }
     .card-coiffure    { border-left: 3px solid #C4714A; }
@@ -693,10 +727,13 @@
     /* ─── RESPONSIVE ─── */
     @media (max-width: 900px) {
       .steps-grid { grid-template-columns: 1fr; }
-      .projects-grid { grid-template-columns: 1fr; }
       .about-grid { grid-template-columns: 1fr; gap: 2rem; }
       .photo-placeholder { max-width: 160px; aspect-ratio: 1; }
       .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .project-cols { grid-template-columns: 1fr; }
+      .project-col-left { border-right: none; border-bottom: 1px solid var(--border); }
+      .project-col-left .project-context-img { height: 200px; }
+      .project-col-right .project-img-block img { min-height: 0; }
     }
     @media (max-width: 700px) {
       .footer-inner { grid-template-columns: 1fr; text-align: center; gap: 1.25rem; }
@@ -753,93 +790,117 @@
 
       <!-- Spa -->
       <div class="project-card card-spa fade">
-        <div class="project-context-img">
-          <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&q=80" alt="Ambiance spa" loading="lazy" />
-        </div>
-        <div class="project-img-block">
-          <img src="https://raw.githubusercontent.com/elodieyab/portfolio-elodieyab/main/images/ohammam.png" alt="Interface de gestion des réservations" loading="lazy" />
-          <p class="project-img-caption">Interface de gestion des réservations</p>
-        </div>
-        <div class="project-body">
-          <div class="project-meta">
-            <div class="project-icon">💆</div>
-            <div>
-              <div class="project-sector">Spa & Hammam</div>
-              <div class="project-title">Agenda intelligent</div>
+        <div class="project-cols">
+          <div class="project-col-left">
+            <div class="project-context-img">
+              <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&q=80" alt="Ambiance spa" loading="lazy" />
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <div class="project-icon">💆</div>
+                <div>
+                  <div class="project-sector">Spa & Hammam</div>
+                  <div class="project-title">Agenda intelligent</div>
+                </div>
+              </div>
+              <p class="project-situation">La gérante jonglait entre les appels, les messages et son agenda papier pour organiser les rendez-vous. Beaucoup de temps perdu, des oublis, une charge mentale constante.</p>
+              <p class="project-solution">Une plateforme complète connectée à Google Calendar et Google Sheets : réservation en ligne, confirmation SMS automatique, rappel la veille, planning du jour visible par toute l'équipe. <strong>Toutes les informations clients centralisées au même endroit,</strong> sans rien changer à leurs habitudes.</p>
+              <p class="project-footnote">Connecté aux outils déjà en place</p>
             </div>
           </div>
-          <p class="project-situation">La gérante jonglait entre les appels, les messages et son agenda papier pour organiser les rendez-vous. Beaucoup de temps perdu, des oublis, une charge mentale constante.</p>
-          <p class="project-solution">Une plateforme complète connectée à Google Calendar et Google Sheets : réservation en ligne, confirmation SMS automatique, rappel la veille, planning du jour visible par toute l'équipe. <strong>Toutes les informations clients centralisées au même endroit,</strong> sans rien changer à leurs habitudes.</p>
-          <p class="project-footnote">Connecté aux outils déjà en place</p>
+          <div class="project-col-right">
+            <div class="project-img-block">
+              <img src="https://raw.githubusercontent.com/elodieyab/portfolio-elodieyab/main/images/ohammam.png" alt="Interface de gestion des réservations" loading="lazy" />
+              <p class="project-img-caption">Interface de gestion des réservations</p>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- Coiffure -->
       <div class="project-card card-coiffure fade">
-        <div class="project-context-img">
-          <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&q=80" alt="Salon de coiffure" loading="lazy" />
-        </div>
-        <div class="project-img-block">
-          <img src="https://raw.githubusercontent.com/elodieyab/portfolio-elodieyab/main/images/salon-de-coiffure.png" alt="Message envoyé automatiquement via WhatsApp dès qu'une réservation est confirmée" loading="lazy" />
-          <p class="project-img-caption">Message envoyé automatiquement via WhatsApp dès qu'une réservation est confirmée</p>
-        </div>
-        <div class="project-body">
-          <div class="project-meta">
-            <div class="project-icon">✂️</div>
-            <div>
-              <div class="project-sector">Salon de coiffure</div>
-              <div class="project-title">Préparation avant le rendez-vous</div>
+        <div class="project-cols">
+          <div class="project-col-left">
+            <div class="project-context-img">
+              <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&q=80" alt="Salon de coiffure" loading="lazy" />
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <div class="project-icon">✂️</div>
+                <div>
+                  <div class="project-sector">Salon de coiffure</div>
+                  <div class="project-title">Préparation avant le rendez-vous</div>
+                </div>
+              </div>
+              <p class="project-situation">La coiffeuse découvrait l'état des cheveux de sa cliente seulement à son arrivée. Parfois la prestation demandée n'était pas réalisable. Des incompréhensions, du temps perdu.</p>
+              <p class="project-solution">Après chaque réservation, un message WhatsApp part automatiquement pour demander des photos des cheveux et du modèle souhaité. <strong>Tout ça avant le rendez-vous.</strong></p>
+              <p class="project-footnote">Connecté aux outils déjà en place</p>
             </div>
           </div>
-          <p class="project-situation">La coiffeuse découvrait l'état des cheveux de sa cliente seulement à son arrivée. Parfois la prestation demandée n'était pas réalisable. Des incompréhensions, du temps perdu.</p>
-          <p class="project-solution">Après chaque réservation, un message WhatsApp part automatiquement pour demander des photos des cheveux et du modèle souhaité. <strong>Tout ça avant le rendez-vous.</strong></p>
-          <p class="project-footnote">Connecté aux outils déjà en place</p>
+          <div class="project-col-right">
+            <div class="project-img-block">
+              <img src="https://raw.githubusercontent.com/elodieyab/portfolio-elodieyab/main/images/salon-de-coiffure.png" alt="Message envoyé automatiquement via WhatsApp dès qu'une réservation est confirmée" loading="lazy" />
+              <p class="project-img-caption">Message envoyé automatiquement via WhatsApp dès qu'une réservation est confirmée</p>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- Restaurant -->
       <div class="project-card card-restaurant fade">
-        <div class="project-context-img">
-          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80" alt="Table de restaurant" loading="lazy" />
-        </div>
-        <div class="project-img-block">
-          <img src="https://raw.githubusercontent.com/elodieyab/portfolio-elodieyab/main/images/restaurant-1.png?v=4" alt="Interface de gestion de salle en temps réel" loading="lazy" />
-          <p class="project-img-caption">Interface de gestion de salle en temps réel</p>
-        </div>
-        <div class="project-body">
-          <div class="project-meta">
-            <div class="project-icon">🍽️</div>
-            <div>
-              <div class="project-sector">Restaurant</div>
-              <div class="project-title">Tables en attente pendant le service</div>
+        <div class="project-cols">
+          <div class="project-col-left">
+            <div class="project-context-img">
+              <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80" alt="Table de restaurant" loading="lazy" />
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <div class="project-icon">🍽️</div>
+                <div>
+                  <div class="project-sector">Restaurant</div>
+                  <div class="project-title">Tables en attente pendant le service</div>
+                </div>
+              </div>
+              <p class="project-situation">Pendant le rush du soir, l'équipe n'avait pas le temps de gérer les clients en retard. Les tables restaient bloquées. D'autres clients attendaient. Personne ne savait quoi décider.</p>
+              <p class="project-solution">Une interface simple pour voir en temps réel quelles tables sont en retard et <strong>envoyer une relance en un clic,</strong> sans décrocher le téléphone.</p>
+              <p class="project-footnote">Connecté aux outils déjà en place</p>
             </div>
           </div>
-          <p class="project-situation">Pendant le rush du soir, l'équipe n'avait pas le temps de gérer les clients en retard. Les tables restaient bloquées. D'autres clients attendaient. Personne ne savait quoi décider.</p>
-          <p class="project-solution">Une interface simple pour voir en temps réel quelles tables sont en retard et <strong>envoyer une relance en un clic,</strong> sans décrocher le téléphone.</p>
-          <p class="project-footnote">Connecté aux outils déjà en place</p>
+          <div class="project-col-right">
+            <div class="project-img-block">
+              <img src="https://raw.githubusercontent.com/elodieyab/portfolio-elodieyab/main/images/restaurant-1.png?v=4" alt="Interface de gestion de salle en temps réel" loading="lazy" />
+              <p class="project-img-caption">Interface de gestion de salle en temps réel</p>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- Boulangerie -->
       <div class="project-card card-boulangerie fade">
-        <div class="project-context-img">
-          <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80" alt="Boulangerie artisanale" loading="lazy" />
-        </div>
-        <div class="project-img-block">
-          <img src="https://raw.githubusercontent.com/elodieyab/portfolio-elodieyab/main/images/boulangerie.png" alt="Interface de gestion des commandes spéciales" loading="lazy" />
-          <p class="project-img-caption">Interface de gestion des commandes spéciales</p>
-        </div>
-        <div class="project-body">
-          <div class="project-meta">
-            <div class="project-icon">🥐</div>
-            <div>
-              <div class="project-sector">Boulangerie</div>
-              <div class="project-title">Commandes spéciales en période de fêtes</div>
+        <div class="project-cols">
+          <div class="project-col-left">
+            <div class="project-context-img">
+              <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80" alt="Boulangerie artisanale" loading="lazy" />
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <div class="project-icon">🥐</div>
+                <div>
+                  <div class="project-sector">Boulangerie</div>
+                  <div class="project-title">Commandes spéciales en période de fêtes</div>
+                </div>
+              </div>
+              <p class="project-situation">À Noël et à Pâques, les commandes s'accumulaient sur des bouts de papier. Des oublis, des erreurs, des clients qui arrivaient pour rien.</p>
+              <p class="project-solution">Un outil simple pour enregistrer, suivre et retrouver les commandes rapidement. <strong>Confirmation par SMS automatique</strong> dès la commande passée.</p>
+              <p class="project-footnote">Connecté aux outils déjà en place</p>
             </div>
           </div>
-          <p class="project-situation">À Noël et à Pâques, les commandes s'accumulaient sur des bouts de papier. Des oublis, des erreurs, des clients qui arrivaient pour rien.</p>
-          <p class="project-solution">Un outil simple pour enregistrer, suivre et retrouver les commandes rapidement. <strong>Confirmation par SMS automatique</strong> dès la commande passée.</p>
-          <p class="project-footnote">Connecté aux outils déjà en place</p>
+          <div class="project-col-right">
+            <div class="project-img-block">
+              <img src="https://raw.githubusercontent.com/elodieyab/portfolio-elodieyab/main/images/boulangerie.png" alt="Interface de gestion des commandes spéciales" loading="lazy" />
+              <p class="project-img-caption">Interface de gestion des commandes spéciales</p>
+            </div>
+          </div>
         </div>
       </div>
 
