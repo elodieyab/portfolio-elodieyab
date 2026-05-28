@@ -13,10 +13,10 @@
       --beige:      #F5F0E8;
       --beige-mid:  #EDE5D8;
       --beige-dark: #E0D5C5;
-      --sage:       #5C8A6E;
-      --sage-light: #EAF1ED;
-      --sage-mid:   #B8D0C3;
-      --terra:      #C4714A;
+      --sage:       #3D7A59;
+      --sage-light: #E8F2EC;
+      --sage-mid:   #A8C9B8;
+      --terra:      #B85C38;
       --terra-light:#FAF0EB;
       --ink:        #2C2C2A;
       --warm-gray:  #6B6560;
@@ -78,8 +78,8 @@
       font-size: .82rem;
       font-weight: 600;
       color: var(--ink) !important;
-      padding: .4rem 1rem;
-      border-radius: 6px;
+      padding: .4rem 1.1rem;
+      border-radius: 50px;
       border: 1.5px solid var(--border);
       transition: border-color .18s, background .18s !important;
     }
@@ -94,11 +94,31 @@
       display: flex;
       align-items: center;
       padding: 8rem 2.5rem 5rem;
+      position: relative;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(245,240,232,.88);
     }
     .hero-inner {
       max-width: 780px;
       margin: 0 auto;
       width: 100%;
+      position: relative;
+      z-index: 1;
     }
     .hero-tag {
       display: inline-block;
@@ -135,14 +155,14 @@
       background: var(--sage);
       color: #fff;
       padding: .75rem 1.65rem;
-      border-radius: 8px;
+      border-radius: 50px;
       text-decoration: none;
       border: none;
       cursor: pointer;
-      transition: background .18s, transform .18s;
-      box-shadow: 0 2px 12px rgba(92,138,110,.18);
+      transition: background .18s, transform .18s, box-shadow .18s;
+      box-shadow: 0 2px 14px rgba(61,122,89,.25);
     }
-    .btn-primary:hover { background: #4d7a5e; transform: translateY(-1px); }
+    .btn-primary:hover { background: #2d6645; transform: translateY(-2px); box-shadow: 0 6px 24px rgba(61,122,89,.32); }
     .btn-secondary {
       display: inline-flex;
       align-items: center;
@@ -153,13 +173,13 @@
       background: transparent;
       color: var(--ink);
       padding: .75rem 1.65rem;
-      border-radius: 8px;
+      border-radius: 50px;
       text-decoration: none;
       border: 1.5px solid var(--border);
       cursor: pointer;
       transition: border-color .18s, background .18s, transform .18s;
     }
-    .btn-secondary:hover { border-color: var(--sage-mid); background: var(--sage-light); transform: translateY(-1px); }
+    .btn-secondary:hover { border-color: var(--sage-mid); background: var(--sage-light); transform: translateY(-2px); }
 
     /* ─── SHARED ─── */
     .section-wrap { padding: 5.5rem 2.5rem; }
@@ -204,23 +224,24 @@
     .step-card {
       background: #fff;
       border: 1px solid var(--border);
-      border-radius: 14px;
+      border-radius: 20px;
       padding: 2rem 1.75rem;
       box-shadow: 0 1px 8px var(--shadow-sm);
       transition: transform .22s, box-shadow .22s;
     }
-    .step-card:hover { transform: translateY(-3px); box-shadow: 0 6px 22px var(--shadow-md); }
-    .step-n {
-      font-family: 'Lora', serif;
-      font-size: 3rem;
-      font-weight: 700;
-      line-height: 1;
-      margin-bottom: 1.1rem;
-      letter-spacing: -.04em;
+    .step-card:hover { transform: translateY(-4px); box-shadow: 0 10px 32px var(--shadow-md); }
+    .step-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.4rem;
     }
-    .step-card:nth-child(1) .step-n { color: var(--beige-dark); }
-    .step-card:nth-child(2) .step-n { color: var(--sage-mid); }
-    .step-card:nth-child(3) .step-n { color: #E8C2AA; }
+    .step-card:nth-child(1) .step-icon { background: var(--sage-light); color: var(--sage); }
+    .step-card:nth-child(2) .step-icon { background: #FEF3E2; color: #B87840; }
+    .step-card:nth-child(3) .step-icon { background: var(--terra-light); color: var(--terra); }
     .step-verb {
       font-family: 'Lora', serif;
       font-size: 1.2rem;
@@ -236,8 +257,8 @@
       font-weight: 600;
       letter-spacing: .08em;
       text-transform: uppercase;
-      padding: .28rem .7rem;
-      border-radius: 99px;
+      padding: .28rem .8rem;
+      border-radius: 50px;
     }
     .step-card:nth-child(1) .step-pill { background: var(--sage-light); color: var(--sage); border: 1px solid var(--sage-mid); }
     .step-card:nth-child(2) .step-pill { background: var(--beige); color: var(--warm-gray); border: 1px solid var(--beige-dark); }
@@ -247,97 +268,105 @@
     .projects-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 1.5rem;
+      gap: 2rem;
     }
     .project-card {
       background: #fff;
       border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 1px 8px var(--shadow-sm);
+      box-shadow: 0 2px 12px var(--shadow-sm);
       display: flex;
       flex-direction: column;
-      transition: transform .22s, box-shadow .22s;
+      transition: transform .28s, box-shadow .28s;
     }
-    .project-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px var(--shadow-md); }
-    .card-spa         { border-left: 3px solid #5C8A6E; }
-    .card-spa         .project-sector { color: #5C8A6E; }
-    .card-coiffure    { border-left: 3px solid #C4714A; }
-    .card-coiffure    .project-sector { color: #C4714A; }
-    .card-restaurant  { border-left: 3px solid #C49A4A; }
-    .card-restaurant  .project-sector { color: #C49A4A; }
-    .card-boulangerie { border-left: 3px solid #C4B04A; }
-    .card-boulangerie .project-sector { color: #C4B04A; }
+    .project-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(44,44,42,.15); }
 
-    .project-img-placeholder {
-      width: 100%;
-      aspect-ratio: 16/7;
-      background: var(--beige);
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: .75rem;
-      font-style: italic;
-      color: var(--light-gray);
-    }
-    .project-context-img {
-      width: 100%;
-      height: 200px;
+    /* Card accents */
+    .card-spa         { border-left: 4px solid #3D7A59; }
+    .card-coiffure    { border-left: 4px solid #B85C38; }
+    .card-restaurant  { border-left: 4px solid #C49A4A; }
+    .card-boulangerie { border-left: 4px solid #C4B04A; }
+
+    /* ─── CARD HERO (photo background) ─── */
+    .project-card-hero {
       position: relative;
+      height: 270px;
       overflow: hidden;
+      flex-shrink: 0;
     }
-    .project-context-img img {
+    .project-card-hero img {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform .4s ease;
+      transition: transform .5s ease;
     }
-    .project-card:hover .project-context-img img { transform: scale(1.03); }
-    .project-context-img::after {
-      content: '';
+    .project-card:hover .project-card-hero img { transform: scale(1.06); }
+    .project-card-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(44,44,42,.15);
-      pointer-events: none;
+      background: linear-gradient(to bottom, rgba(20,15,10,.05) 0%, rgba(20,15,10,.68) 100%);
+      z-index: 1;
     }
-
-    .project-img-block img { width: 100%; display: block; border-bottom: 1px solid var(--border); cursor: zoom-in; transition: opacity .15s; }
-    .project-img-block img:hover { opacity: .88; }
-    .project-img-caption { font-size: .7rem; font-style: italic; color: var(--light-gray); text-align: center; padding: .3rem 1rem; background: var(--beige); border-bottom: 1px solid var(--border); }
-
-    .project-body { padding: 1.75rem; display: flex; flex-direction: column; gap: .95rem; flex: 1; }
-
-    .project-meta { display: flex; align-items: center; gap: .75rem; }
-    .project-icon {
-      width: 40px; height: 40px;
-      border-radius: 10px;
-      background: var(--beige);
-      border: 1px solid var(--border);
+    .project-card-header {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1.4rem 1.75rem;
+      display: flex;
+      align-items: center;
+      gap: .85rem;
+      z-index: 2;
+    }
+    .project-card-header .project-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.3);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       flex-shrink: 0;
+      backdrop-filter: blur(8px);
     }
-    .project-sector {
-      font-size: .68rem;
+    .project-card-header .project-sector {
+      font-size: .65rem;
       font-weight: 700;
-      letter-spacing: .1em;
+      letter-spacing: .12em;
       text-transform: uppercase;
-      color: var(--terra);
-      margin-bottom: .15rem;
+      color: rgba(255,255,255,.75);
+      margin-bottom: .2rem;
     }
-    .project-title {
+    .project-card-header .project-title {
       font-family: 'Lora', serif;
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-weight: 700;
-      color: var(--ink);
+      color: #fff;
       letter-spacing: -.01em;
-      line-height: 1.3;
+      line-height: 1.25;
+      text-shadow: 0 1px 4px rgba(0,0,0,.3);
     }
 
+    /* ─── CARD BODY (text + screenshot) ─── */
+    .project-card-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      flex: 1;
+      min-height: 0;
+    }
+    .project-text {
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: .95rem;
+      border-right: 1px solid var(--border);
+    }
     .project-situation {
       font-family: 'Lora', serif;
       font-size: .86rem;
@@ -346,7 +375,7 @@
       line-height: 1.7;
       padding: .8rem 1rem .8rem 1.6rem;
       background: var(--beige);
-      border-radius: 8px;
+      border-radius: 10px;
       position: relative;
     }
     .project-situation::before {
@@ -359,20 +388,46 @@
       left: .55rem;
       font-family: 'Lora', serif;
     }
-
     .project-solution {
       font-size: .86rem;
       color: var(--ink);
       line-height: 1.75;
     }
     .project-solution strong { color: var(--sage); font-weight: 600; }
-
     .project-footnote {
       font-size: .72rem;
       font-style: italic;
       color: var(--light-gray);
       margin-top: auto;
       padding-top: .25rem;
+    }
+    .project-img-col {
+      display: flex;
+      flex-direction: column;
+      background: var(--beige);
+    }
+    .project-img-col .screenshot {
+      flex: 1;
+      overflow: hidden;
+      min-height: 180px;
+    }
+    .project-img-col .screenshot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      cursor: zoom-in;
+      transition: opacity .15s;
+    }
+    .project-img-col .screenshot img:hover { opacity: .9; }
+    .project-img-caption {
+      font-size: .69rem;
+      font-style: italic;
+      color: var(--light-gray);
+      text-align: center;
+      padding: .45rem 1rem;
+      background: var(--beige);
+      border-top: 1px solid var(--border);
     }
 
     /* ─── À PROPOS ─── */
@@ -386,19 +441,6 @@
       display: flex;
       flex-direction: column;
       gap: .75rem;
-    }
-    .photo-placeholder {
-      width: 100%;
-      aspect-ratio: 3/4;
-      border-radius: 14px;
-      background: var(--cream);
-      border: 1.5px dashed var(--beige-dark);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: .75rem;
-      font-style: italic;
-      color: var(--light-gray);
     }
     .photo-profil {
       width: 100%;
@@ -440,7 +482,7 @@
       padding: 1rem 1.2rem;
       background: #fff;
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 14px;
       text-decoration: none;
       color: var(--ink);
       box-shadow: 0 1px 6px var(--shadow-sm);
@@ -486,13 +528,13 @@
       color: var(--ink);
       background: #fff;
       border: 1.5px solid var(--border);
-      border-radius: 9px;
+      border-radius: 10px;
       padding: .65rem .9rem;
       outline: none;
       transition: border-color .18s, box-shadow .18s;
       width: 100%;
     }
-    .cf-input:focus { border-color: var(--sage-mid); box-shadow: 0 0 0 3px rgba(92,138,110,.1); }
+    .cf-input:focus { border-color: var(--sage-mid); box-shadow: 0 0 0 3px rgba(61,122,89,.1); }
     .cf-input::placeholder { color: var(--light-gray); }
     .cf-textarea { resize: vertical; min-height: 110px; line-height: 1.6; }
     .cf-feedback {
@@ -534,7 +576,7 @@
     .footer-social { display: flex; gap: .75rem; align-items: center; justify-content: center; }
     .footer-social-link {
       width: 36px; height: 36px;
-      border-radius: 9px;
+      border-radius: 50px;
       background: var(--cream);
       border: 1px solid var(--border);
       display: flex; align-items: center; justify-content: center;
@@ -694,8 +736,9 @@
     @media (max-width: 900px) {
       .steps-grid { grid-template-columns: 1fr; }
       .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .photo-placeholder { max-width: 160px; aspect-ratio: 1; }
       .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .project-card-body { grid-template-columns: 1fr; }
+      .project-text { border-right: none; border-bottom: 1px solid var(--border); }
     }
     @media (max-width: 700px) {
       .footer-inner { grid-template-columns: 1fr; text-align: center; gap: 1.25rem; }
@@ -709,6 +752,7 @@
       .section-wrap { padding: 3.75rem 1.25rem; }
       .hero { padding: 6.5rem 1.25rem 3.5rem; }
       footer { padding: 2rem 1.25rem 1.25rem; }
+      .project-card-hero { height: 220px; }
     }
   </style>
 </head>
@@ -727,6 +771,9 @@
 
 <!-- ── HERO ── -->
 <section class="hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1600&q=80" alt="" loading="eager" />
+  </div>
   <div class="hero-inner">
     <span class="hero-tag">Outils simples pour commerces de proximité</span>
     <h1>J'observe des problèmes qui reviennent souvent dans certains commerces. Puis j'<span style="color:var(--terra)">imagine</span> des outils simples pour y répondre.</h1>
@@ -752,93 +799,113 @@
 
       <!-- Spa -->
       <div class="project-card card-spa fade">
-        <div class="project-context-img">
+        <div class="project-card-hero">
           <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&q=80" alt="Ambiance spa" loading="lazy" />
-        </div>
-        <div class="project-body">
-          <div class="project-meta">
+          <div class="project-card-overlay"></div>
+          <div class="project-card-header">
             <div class="project-icon">💆</div>
             <div>
               <div class="project-sector">Spa & Hammam</div>
               <div class="project-title">Agenda intelligent</div>
             </div>
           </div>
-          <p class="project-situation">La gérante jonglait entre les appels, les messages et son agenda papier pour organiser les rendez-vous. Beaucoup de temps perdu, des oublis, une charge mentale constante.</p>
-          <p class="project-solution">Une plateforme complète connectée à Google Calendar et Google Sheets : réservation en ligne, confirmation SMS automatique, rappel la veille, planning du jour visible par toute l'équipe. <strong>Toutes les informations clients centralisées au même endroit,</strong> sans rien changer à leurs habitudes.</p>
-          <p class="project-footnote">Connecté aux outils déjà en place</p>
         </div>
-        <div class="project-img-block">
-          <img src="https://raw.githubusercontent.com/elodieyab/portfolio-elodieyab/main/images/ohammam.png" alt="Interface de gestion des réservations" loading="lazy" />
-          <p class="project-img-caption">Interface de gestion des réservations</p>
+        <div class="project-card-body">
+          <div class="project-text">
+            <p class="project-situation">La gérante jonglait entre les appels, les messages et son agenda papier pour organiser les rendez-vous. Beaucoup de temps perdu, des oublis, une charge mentale constante.</p>
+            <p class="project-solution">Une plateforme complète connectée à Google Calendar et Google Sheets : réservation en ligne, confirmation SMS automatique, rappel la veille, planning du jour visible par toute l'équipe. <strong>Toutes les informations clients centralisées au même endroit,</strong> sans rien changer à leurs habitudes.</p>
+            <p class="project-footnote">Connecté aux outils déjà en place</p>
+          </div>
+          <div class="project-img-col">
+            <div class="screenshot">
+              <img src="https://raw.githubusercontent.com/elodieyab/portfolio-elodieyab/main/images/ohammam.png" alt="Interface de gestion des réservations" loading="lazy" />
+            </div>
+            <p class="project-img-caption">Interface de gestion des réservations</p>
+          </div>
         </div>
       </div>
 
       <!-- Coiffure -->
       <div class="project-card card-coiffure fade">
-        <div class="project-context-img">
+        <div class="project-card-hero">
           <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&q=80" alt="Salon de coiffure" loading="lazy" />
-        </div>
-        <div class="project-body">
-          <div class="project-meta">
+          <div class="project-card-overlay"></div>
+          <div class="project-card-header">
             <div class="project-icon">✂️</div>
             <div>
               <div class="project-sector">Salon de coiffure</div>
               <div class="project-title">Préparation avant le rendez-vous</div>
             </div>
           </div>
-          <p class="project-situation">La coiffeuse découvrait l'état des cheveux de sa cliente seulement à son arrivée. Parfois la prestation demandée n'était pas réalisable. Des incompréhensions, du temps perdu.</p>
-          <p class="project-solution">Après chaque réservation, un message WhatsApp part automatiquement pour demander des photos des cheveux et du modèle souhaité. <strong>Tout ça avant le rendez-vous.</strong></p>
-          <p class="project-footnote">Connecté aux outils déjà en place</p>
         </div>
-        <div class="project-img-block">
-          <img src="https://raw.githubusercontent.com/elodieyab/portfolio-elodieyab/main/images/salon-de-coiffure.png" alt="Message envoyé automatiquement via WhatsApp dès qu'une réservation est confirmée" loading="lazy" />
-          <p class="project-img-caption">Message envoyé automatiquement via WhatsApp dès qu'une réservation est confirmée</p>
+        <div class="project-card-body">
+          <div class="project-text">
+            <p class="project-situation">La coiffeuse découvrait l'état des cheveux de sa cliente seulement à son arrivée. Parfois la prestation demandée n'était pas réalisable. Des incompréhensions, du temps perdu.</p>
+            <p class="project-solution">Après chaque réservation, un message WhatsApp part automatiquement pour demander des photos des cheveux et du modèle souhaité. <strong>Tout ça avant le rendez-vous.</strong></p>
+            <p class="project-footnote">Connecté aux outils déjà en place</p>
+          </div>
+          <div class="project-img-col">
+            <div class="screenshot">
+              <img src="https://raw.githubusercontent.com/elodieyab/portfolio-elodieyab/main/images/salon-de-coiffure.png" alt="Message envoyé automatiquement via WhatsApp dès qu'une réservation est confirmée" loading="lazy" />
+            </div>
+            <p class="project-img-caption">Message envoyé automatiquement via WhatsApp dès qu'une réservation est confirmée</p>
+          </div>
         </div>
       </div>
 
       <!-- Restaurant -->
       <div class="project-card card-restaurant fade">
-        <div class="project-context-img">
+        <div class="project-card-hero">
           <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80" alt="Table de restaurant" loading="lazy" />
-        </div>
-        <div class="project-body">
-          <div class="project-meta">
+          <div class="project-card-overlay"></div>
+          <div class="project-card-header">
             <div class="project-icon">🍽️</div>
             <div>
               <div class="project-sector">Restaurant</div>
               <div class="project-title">Tables en attente pendant le service</div>
             </div>
           </div>
-          <p class="project-situation">Pendant le rush du soir, l'équipe n'avait pas le temps de gérer les clients en retard. Les tables restaient bloquées. D'autres clients attendaient. Personne ne savait quoi décider.</p>
-          <p class="project-solution">Une interface simple pour voir en temps réel quelles tables sont en retard et <strong>envoyer une relance en un clic,</strong> sans décrocher le téléphone.</p>
-          <p class="project-footnote">Connecté aux outils déjà en place</p>
         </div>
-        <div class="project-img-block">
-          <img src="https://raw.githubusercontent.com/elodieyab/portfolio-elodieyab/main/images/restaurant-1.png?v=4" alt="Interface de gestion de salle en temps réel" loading="lazy" />
-          <p class="project-img-caption">Interface de gestion de salle en temps réel</p>
+        <div class="project-card-body">
+          <div class="project-text">
+            <p class="project-situation">Pendant le rush du soir, l'équipe n'avait pas le temps de gérer les clients en retard. Les tables restaient bloquées. D'autres clients attendaient. Personne ne savait quoi décider.</p>
+            <p class="project-solution">Une interface simple pour voir en temps réel quelles tables sont en retard et <strong>envoyer une relance en un clic,</strong> sans décrocher le téléphone.</p>
+            <p class="project-footnote">Connecté aux outils déjà en place</p>
+          </div>
+          <div class="project-img-col">
+            <div class="screenshot">
+              <img src="https://raw.githubusercontent.com/elodieyab/portfolio-elodieyab/main/images/restaurant-1.png?v=4" alt="Interface de gestion de salle en temps réel" loading="lazy" />
+            </div>
+            <p class="project-img-caption">Interface de gestion de salle en temps réel</p>
+          </div>
         </div>
       </div>
 
       <!-- Boulangerie -->
       <div class="project-card card-boulangerie fade">
-        <div class="project-context-img">
+        <div class="project-card-hero">
           <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80" alt="Boulangerie artisanale" loading="lazy" />
-        </div>
-        <div class="project-body">
-          <div class="project-meta">
+          <div class="project-card-overlay"></div>
+          <div class="project-card-header">
             <div class="project-icon">🥐</div>
             <div>
               <div class="project-sector">Boulangerie</div>
               <div class="project-title">Commandes spéciales en période de fêtes</div>
             </div>
           </div>
-          <p class="project-situation">À Noël et à Pâques, les commandes s'accumulaient sur des bouts de papier. Des oublis, des erreurs, des clients qui arrivaient pour rien.</p>
-          <p class="project-solution">Un outil simple pour enregistrer, suivre et retrouver les commandes rapidement. <strong>Confirmation par SMS automatique</strong> dès la commande passée.</p>
-          <p class="project-footnote">Connecté aux outils déjà en place</p>
         </div>
-        <div class="project-img-block">
-          <img src="https://raw.githubusercontent.com/elodieyab/portfolio-elodieyab/main/images/boulangerie.png" alt="Interface de gestion des commandes spéciales" loading="lazy" />
-          <p class="project-img-caption">Interface de gestion des commandes spéciales</p>
+        <div class="project-card-body">
+          <div class="project-text">
+            <p class="project-situation">À Noël et à Pâques, les commandes s'accumulaient sur des bouts de papier. Des oublis, des erreurs, des clients qui arrivaient pour rien.</p>
+            <p class="project-solution">Un outil simple pour enregistrer, suivre et retrouver les commandes rapidement. <strong>Confirmation par SMS automatique</strong> dès la commande passée.</p>
+            <p class="project-footnote">Connecté aux outils déjà en place</p>
+          </div>
+          <div class="project-img-col">
+            <div class="screenshot">
+              <img src="https://raw.githubusercontent.com/elodieyab/portfolio-elodieyab/main/images/boulangerie.png" alt="Interface de gestion des commandes spéciales" loading="lazy" />
+            </div>
+            <p class="project-img-caption">Interface de gestion des commandes spéciales</p>
+          </div>
         </div>
       </div>
 
@@ -855,19 +922,25 @@
 
     <div class="steps-grid">
       <div class="step-card fade">
-        <div class="step-n">01</div>
+        <div class="step-icon">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
         <div class="step-verb">J'observe</div>
         <p class="step-text">Je vais voir sur le terrain ce qui revient vraiment.</p>
         <span class="step-pill">Terrain</span>
       </div>
       <div class="step-card fade">
-        <div class="step-n">02</div>
+        <div class="step-icon">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17H8v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z"/></svg>
+        </div>
         <div class="step-verb">J'imagine</div>
         <p class="step-text">Je réfléchis à quelque chose de simple, connecté à ce que vous utilisez déjà.</p>
         <span class="step-pill">Conception</span>
       </div>
       <div class="step-card fade">
-        <div class="step-n">03</div>
+        <div class="step-icon">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        </div>
         <div class="step-verb">Je construis</div>
         <p class="step-text">Je crée un outil qui fonctionne vraiment, et je reste disponible après.</p>
         <span class="step-pill">Livraison</span>
@@ -1096,9 +1169,9 @@
     setTimeout(() => { lbOverlay.classList.remove('open'); lbImg.src = ''; document.body.style.overflow = ''; }, 260);
   }
 
-  document.querySelectorAll('.project-img-block img').forEach(img => {
+  document.querySelectorAll('.project-img-col .screenshot img').forEach(img => {
     img.addEventListener('click', () => {
-      const caption = img.closest('.project-img-block')?.querySelector('.project-img-caption')?.textContent || '';
+      const caption = img.closest('.project-img-col')?.querySelector('.project-img-caption')?.textContent || '';
       openLb(img.src, caption);
     });
   });
